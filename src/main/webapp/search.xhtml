@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+  xmlns:f="http://java.sun.com/jsf/core"
+>
+  <h:head>
+    <meta charset="utf-8" />
+    <title>Green Place App</title>
+    <h:outputStylesheet library="bootstrap" name="css/bootstrap.min.css" />
+    <h:outputStylesheet library="bootstrap" name="js/bootstrap.min.js" />
+
+    <h:outputStylesheet library="css" name="custom.css" />
+  </h:head>
+
+  <h:body>
+    <nav class="navbar navbar-dark bg-success mb-4">
+      <div class="container-fluid d-flex justify-content-between">
+        <a class="navbar-brand" href="index.xhtml">Green Place</a>
+
+        <div id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex flex-row gap-3">
+            <li class="nav-item">
+              <a class="nav-link" href="create.xhtml"
+                >Criar entrega</a
+              >
+            </li>
+            <li class="nav-item ml-3">
+              <a class="nav-link active" aria-current="page" href="search.xhtml">Buscar entrega</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <header class="page-header">
+        <h1>Buscar<small class="pl-2">entrega</small></h1>
+      </header>
+      <hr />
+      <h:form styleClass="d-flex flex-row">
+        <div class="col-xs-12 col-sm-8 col-md-9">
+          <h:inputText
+            styleClass="form-control"
+            id="descricao"
+            a:placeholder="Informe o identificador da entrega"
+            value="#{deliveryListBean.buscaId}"
+          />
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-3">
+          <h:commandButton
+            value="Buscar"
+            styleClass="btn btn-primary"
+            action="#{deliveryListBean.findDelivery}"
+          />
+        </div>
+      </h:form>
+
+      <h:dataTable
+        id="tblTarefas"
+        var="delivery"
+        value="#{deliveryListBean.deliveries}"
+        styleClass="table mt-4"
+      >
+        <h:column>
+          <f:facet name="header"> Identificador </f:facet>
+          <h:outputLabel value="#{delivery.id}" />
+        </h:column>
+
+        <h:column>
+          <f:facet name="header"> Remetente </f:facet>
+          <h:outputLabel value="#{delivery.remetente}" />
+        </h:column>
+
+        <h:column>
+          <f:facet name="header"> Destinatario </f:facet>
+          <h:outputLabel value="#{delivery.destinatario}" />
+        </h:column>
+
+		<h:column>
+          <f:facet name="header"> Endereço </f:facet>
+          <h:outputLabel value="#{delivery.endereco}" />
+        </h:column>
+      </h:dataTable>
+    </div>
+  </h:body>
+</html>
